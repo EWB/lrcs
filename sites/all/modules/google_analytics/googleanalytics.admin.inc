@@ -206,7 +206,7 @@ function googleanalytics_admin_settings_form(&$form_state) {
     '#title' => t('List of download file extensions'),
     '#default_value' => variable_get('googleanalytics_trackfiles_extensions', GOOGLEANALYTICS_TRACKFILES_EXTENSIONS),
     '#description' => t('A file extension list separated by the | character that will be tracked as download when clicked. Regular expressions are supported. For example: !extensions', array('!extensions' => GOOGLEANALYTICS_TRACKFILES_EXTENSIONS)),
-    '#maxlength' => 255,
+    '#maxlength' => 500,
   );
   $form['linktracking']['googleanalytics_tracklinkid'] = array(
     '#type' => 'checkbox',
@@ -517,11 +517,15 @@ function googleanalytics_admin_settings_form_validate($form, &$form_state) {
   if ($form_state['values']['googleanalytics_domain_mode'] == 2 && empty($form_state['values']['googleanalytics_cross_domains'])) {
     form_set_error('googleanalytics_cross_domains', t('A list of top-level domains is required if <em>Multiple top-level domains</em> has been selected.'));
   }
+  // Clear the domain list if cross domains are disabled.
+  if ($form_state['values']['googleanalytics_domain_mode'] != 2) {
+    $form_state['values']['googleanalytics_cross_domains'] = '';
+  }
+
   // Disallow empty list of download file extensions.
   if ($form_state['values']['googleanalytics_trackfiles'] && empty($form_state['values']['googleanalytics_trackfiles_extensions'])) {
     form_set_error('googleanalytics_trackfiles_extensions', t('List of download file extensions cannot empty.'));
   }
-
   // Clear obsolete local cache if cache has been disabled.
   if (empty($form_state['values']['googleanalytics_cache']) && $form['advanced']['googleanalytics_cache']['#default_value']) {
     googleanalytics_clear_js_cache();

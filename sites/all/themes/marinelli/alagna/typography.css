@@ -11,11 +11,6 @@ body {
 	font-size:76%;/*set regular font size*/
 	letter-spacing:normal;
 	text-align: center;
-	font-size: 18px;
-    font-family: "Avenir","Helvetica",sans-serif;
-    color: #333333;
-    font-weight: 300;
-    line-height: 150%;
 	}
 	
 #page {
@@ -29,7 +24,7 @@ body {
 	}
 
 .path  p span {
-    font-family: "Avenir","Helvetica",sans-serif;
+	font: bold 0.75em Georgia, "Times New Roman", Times, serif;
 	text-transform:uppercase;
 	}
 	
@@ -46,7 +41,7 @@ body {
 	
 
 #header h1, #header p.sitetitle { /* site title */
-    font-family: "Avenir","Helvetica",sans-serif;
+	font-family:"trebuchet MS", verdana;
 	font-size: 4em;
 	font-weight: lighter;
 	letter-spacing: -1px;
